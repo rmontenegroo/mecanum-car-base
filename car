@@ -1,0 +1,37 @@
+#!/bin/env python3
+
+import yaml
+
+
+with open('config.yaml', 'r') as f:
+    conf = yaml.safe_load(f)
+
+
+def main():
+
+    controller = None
+
+    if conf['main']['controller-mode'] == 'ps':
+
+        from controller.ps import PSController as Controller
+
+        from threading import Thread
+
+        t = Thread()
+
+        controller = Controller(device=conf['main']['device'], guest=t, connecting_using_ds4drv=False)
+
+    else:
+        print('Controller not found!')
+
+	
+    if controller:
+
+        try:
+            controller.listen()
+        except (KeyboardInterrupt, SystemExit):
+            controller.shutdown()
+
+
+if __name__ == "__main__":
+    main()

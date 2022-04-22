@@ -1,0 +1,6 @@
+main:
+    controller-mode: ps
+    device: /dev/input/js0
+    # controller-mode: wifi
+    # udp-port: 5005
+
