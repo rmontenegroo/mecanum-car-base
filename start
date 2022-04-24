@@ -1,7 +1,8 @@
 #!/bin/env python3
 
-import yaml
+from car.car import Car
 
+import yaml
 
 with open('config.yaml', 'r') as f:
     conf = yaml.safe_load(f)
@@ -9,22 +10,20 @@ with open('config.yaml', 'r') as f:
 
 def main():
 
-    controller = None
+    car = Car()
 
+    controller = None
+    
     if conf['main']['controller-mode'] == 'ps':
 
-        from controller.ps import PSController as Controller
+        from car.controller.ps import PSController as Controller
 
-        from threading import Thread
-
-        t = Thread()
-
-        controller = Controller(device=conf['main']['device'], guest=t, connecting_using_ds4drv=False)
+        controller = Controller(device=conf['main']['device'], guest=car, connecting_using_ds4drv=False)
 
     else:
         print('Controller not found!')
 
-	
+
     if controller:
 
         try:
