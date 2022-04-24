@@ -10,7 +10,7 @@ class DCMotorAbstract:
 
     FORWARD = Raspi_MotorHAT.FORWARD
     BACKWARD = Raspi_MotorHAT.BACKWARD
-    MAXSPEED = 150
+    MAXSPEED = 75
 
 
 class DCMotor(Thread, DCMotorAbstract):
